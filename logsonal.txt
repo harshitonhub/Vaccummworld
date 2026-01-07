@@ -1,0 +1,52 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------------< lab:vacworld >----------------------------
+[INFO] Building examples-hello 0.1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- astra:2.0.7:deploy (default-cli) @ vacworld ---
+[Scheduler] Processors: 12
+1000
+[Henry] Henry activated
+[Decco] Decco activated
+[Lloyd] Lloyd activated
+[Harry] Harry activated
+[Henry] Recording Obstacle: (14,8) @ (13,7)
+[Henry] Recording Obstacle: (13,8) @ (13,7)
+[Henry] Recording Obstacle: (15,8) @ (14,7)
+[Henry] Recording Obstacle: (16,8) @ (15,7)
+[Henry] Recording Obstacle: (16,6) @ (15,7)
+[Henry] Recording Obstacle: (16,7) @ (15,7)
+[Henry] Route created to (8,4): [move("north"),move("north"),move("north"),move("west"),move("west"),move("west"),move("west"),move("west"),move("west"),move("west")]
+[Lloyd] Recording Obstacle: (2,4) @ (1,3)
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+[Lloyd] Recording Obstacle: (6,4) @ (5,3)
+No dust here!
+[Harry] Recording Obstacle: (1,7) @ (0,6)
+[Harry] Recording Obstacle: (1,8) @ (0,7)
+[Harry] Recording Obstacle: (0,8) @ (0,7)
+No dust here!
+Grid square (1,7) is permanently blocked.
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+[Decco] Recording Obstacle: (9,3) @ (10,2)
+[Lloyd] Recording Obstacle: (1,7) @ (0,6)
+Grid square (0,7) is temporarily obstructed.
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+Grid square (0,6) is temporarily obstructed.
