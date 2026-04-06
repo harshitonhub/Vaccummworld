@@ -1,0 +1,204 @@
+agent VacBot {
+
+    module EIS ei;
+    module Console C;
+    module Routing routing;
+
+    types routes {
+        formula route(list);
+        formula task(string);
+        formula dust(long,long);       // known dust targets
+        formula claimed(long,long);    // claimed dust targets (to avoid duplicates)
+        formula peer(string);          // explicit peers
+    }
+
+    /* -------------------------
+       MAIN ENTRY
+       ------------------------- */
+    rule +!main([string vacbot]) {
+        ei.join("hw");
+        ei.link(vacbot);
+        C.println(vacbot + " activated");
+        !task("decide");
+    }
+
+    rule +!main([string vacbot, list peers]) {
+        ei.join("hw");
+        ei.link(vacbot);
+        C.println(vacbot + " activated");
+        forall (string P : peers) { +peer(P); }
+        -peer(vacbot);
+        !task("decide");
+    }
+
+    /* -------------------------
+       DECISION DRIVER
+       ------------------------- */
+    rule +$ei.event(location(long X, long Y)) : ei.direction(string D) {
+        routing.updateBoundary(X + 1, Y + 1);
+
+        foreach (ei.square(string L, "obstacle") & ~routing.obstacle(X, Y, D, L)) {
+            routing.recordObstacle(X, Y, D, L);
+        }
+
+        !task("decide");
+    }
+
+    /* -------------------------
+       CLEAN IF ON DUST (no extra guards)
+       ------------------------- */
+    rule +!task(string Action) : ei.square("here","dust") {
+        ei.clean();
+        Action = "clean";
+        !task(Action);
+    }
+
+    /* -------------------------
+       SEE DUST: CLAIM, REMEMBER, BROADCAST, PURSUE
+       ------------------------- */
+    rule +!task(string Action)
+        : ei.square(string Rel,"dust")
+        & ei.location(long X,long Y)
+        & ei.direction(string D) {
+
+        list Abs = routing.relativeToAbsolute(X,Y,D,Rel);
+        long dx = at_index(Abs,0,long);
+        long dy = at_index(Abs,1,long);
+
+        // Claim and store locally (prevents duplicate sends; enables planning)
+        if (~claimed(dx,dy)) {
+            +dust(dx,dy);
+            +claimed(dx,dy);
+            foreach (peer(string P)) { send(inform, P, dust(dx,dy)); }
+        }
+
+        // Map percept to valid, purposeful move
+        if (Rel == "forward") {
+            ei.move("forward"); Action = "move";
+        } else if (Rel == "left" | Rel == "forwardLeft") {
+            ei.move("left"); Action = "turn";
+        } else if (Rel == "right" | Rel == "forwardRight") {
+            ei.move("right"); Action = "turn";
+        } else {
+            Action = "decide";
+        }
+    }
+
+    /* -------------------------
+       RECEIVE DUST AND CLAIM
+       ------------------------- */
+    rule @message(inform, string Sender, dust(long X,long Y))
+        : ~claimed(X,Y) {
+        C.println("Received dust from "+Sender+" at ("+X+","+Y+"), claiming...");
+        +dust(X,Y);
+        +claimed(X,Y);
+        !goClean(X,Y);
+    }
+
+    /* -------------------------
+       PLAN TO KNOWN DUST (FROM MEMORY)
+       ------------------------- */
+    rule +!task(string Action)
+        : ei.location(long cx,long cy)
+        & dust(long dx,long dy)
+        & ~route(list L) {
+        list Lr = routing.routeTo(cx,cy,dx,dy);
+        C.println("Route to dust ("+dx+","+dy+"): " + Lr);
+        +route(Lr);
+    }
+
+    /* -------------------------
+       SIMPLE REACTIVE MOVEMENT
+       ------------------------- */
+    rule +!task(string Action) : ~ei.square("here","dust") & ei.square("forward","dust") {
+        ei.move("forward"); Action = "move";
+    }
+    rule +!task(string Action) : ~ei.square("here","dust") & ei.square("left","dust") {
+        ei.move("left"); Action = "move";
+    }
+    rule +!task(string Action) : ~ei.square("here","dust") & ei.square("right","dust") {
+        ei.move("right"); Action = "move";
+    }
+    rule +!task(string Action) : ~ei.square("here","dust") & ei.square("forwardLeft","dust") {
+        ei.move("left"); Action = "turn";
+    }
+    rule +!task(string Action) : ~ei.square("here","dust") & ei.square("forwardRight","dust") {
+        ei.move("right"); Action = "turn";
+    }
+    rule +!task(string Action) : ~ei.square("here","dust") & ~ei.square("forward","obstacle") {
+        ei.move("forward"); Action = "move";
+    }
+
+    /* -------------------------
+       PROACTIVE ROUTE PLANNING (CENTER DEMO)
+       ------------------------- */
+    rule +!task(string Action)
+        : ei.location(long X, long Y)
+        & routing.maxX() >= 16
+        & routing.maxY() >= 8
+        & ~route(list L)
+        & ~dust(long dx,long dy) {
+        long tx = 8l;
+        long ty = 4l;
+        list Lr = routing.routeTo(X, Y, tx, ty);
+        C.println("Route created to (" + tx + "," + ty + "): " + Lr);
+        +route(Lr);
+    }
+
+    /* -------------------------
+       ROUTE FOLLOWING (safe head/tail)
+       ------------------------- */
+    rule +!task(string Action) : route([funct Step]) {
+        -route([Step]);
+        !go(Step, Action);
+    }
+    rule +!task(string Action) : route([funct Step | list Rest]) {
+        -+route(Rest);
+        !go(Step, Action);
+    }
+    rule +!go(move(string D), string Action) {
+        // Do NOT add guards here; let the clean-here rule fire if needed next cycle
+        ei.move(D);
+        Action = D;
+    }
+
+    /* -------------------------
+       DROP DEAD ROUTES WHEN BLOCKED
+       ------------------------- */
+    rule +!task(string Action)
+        : route(list L)
+        & ei.square("forward","obstacle") {
+        C.println("Forward blocked while on route. Dropping route.");
+        -route(L);
+    }
+
+    /*******************
+     * DEFAULT MOVE (with fallback)
+     *******************/
+    // Prefer forward if it's empty
+    rule +!task(string action) : ei.square("forward","empty") {
+        C.println("RULE: No dust visible - move forward (empty)");
+        ei.move("forward");
+        action = "move";
+    }
+
+    // If forward is blocked, try left
+    rule +!task(string action) : ei.square("left","empty") {
+        C.println("RULE: No dust visible - forward blocked, move left");
+        ei.move("left");
+        action = "move";
+    }
+
+    // If forward and left are blocked, try right
+    rule +!task(string action) : ei.square("right","empty") {
+        C.println("RULE: No dust visible - forward/left blocked, move right");
+        ei.move("right");
+        action = "move";
+    }
+
+    // Fallback: can't move anywhere
+    rule +!task(string action) {
+        C.println("RULE: No dust visible - stuck, no adjacent empty squares");
+        action = "none";
+    }
+}

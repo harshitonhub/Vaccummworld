@@ -1,0 +1,123 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------------< lab:vacworld >----------------------------
+[INFO] Building examples-hello 0.1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- astra:2.0.7:deploy (default-cli) @ vacworld ---
+[Scheduler] Processors: 12
+1000
+[Henry] Henry activated
+[Decco] Decco activated
+[Lloyd] Lloyd activated
+[Harry] Harry activated
+[Henry] Recording Obstacle: (14,2) @ (14,3)
+Grid square (14,2) is permanently blocked.
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+[Lloyd] Recording Obstacle: (1,8) @ (0,7)
+[Lloyd] Recording Obstacle: (0,8) @ (0,7)
+[Harry] Recording Obstacle: (10,3) @ (11,4)
+[Henry] Recording Obstacle: (10,3) @ (11,3)
+[Lloyd] Recording Obstacle: (2,8) @ (1,7)
+No dust here!
+Grid square (11,4) is temporarily obstructed.
+[Lloyd] Recording Obstacle: (3,8) @ (2,7)
+[Lloyd] Recording Obstacle: (3,7) @ (2,7)
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+[Decco] Recording Obstacle: (1,8) @ (0,7)
+[Decco] Recording Obstacle: (0,8) @ (0,7)
+[Decco] Recording Obstacle: (2,8) @ (1,7)
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+[Decco] Recording Obstacle: (3,8) @ (2,7)
+[Decco] Recording Obstacle: (3,7) @ (2,7)
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+[Lloyd] Recording Obstacle: (11,1) @ (10,1)
+[Harry] Recording Obstacle: (1,8) @ (0,7)
+[Harry] Recording Obstacle: (0,8) @ (0,7)
+[Harry] Recording Obstacle: (2,8) @ (1,7)
+[Harry] Recording Obstacle: (3,8) @ (2,7)
+[Harry] Recording Obstacle: (3,7) @ (2,7)
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+[Lloyd] Recording Obstacle: (7,6) @ (6,5)
+[Lloyd] Recording Obstacle: (11,6) @ (10,6)
+No dust here!
+No dust here!
+[Lloyd] Recording Obstacle: (10,3) @ (10,4)
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+Terminate batch job (Y/N)? 

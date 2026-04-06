@@ -1,0 +1,74 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------------< lab:vacworld >----------------------------
+[INFO] Building examples-hello 0.1.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- astra:2.0.7:deploy (default-cli) @ vacworld ---
+[Scheduler] Processors: 12
+1000
+[Henry] Henry activated
+[Decco] Decco activated
+[Lloyd] Lloyd activated
+[Harry] Harry activated
+[Harry] Recording Obstacle: (12,3) @ (13,4)
+[Lloyd] Recording Obstacle: (11,8) @ (11,7)
+[Lloyd] Recording Obstacle: (10,8) @ (11,7)
+Grid square (11,8) does not exist!
+No dust here!
+No dust here!
+[Decco] Recording Obstacle: (13,6) @ (12,6)
+[Decco] Recording Obstacle: (12,8) @ (12,7)
+[Decco] Recording Obstacle: (13,8) @ (12,7)
+[Decco] Recording Obstacle: (11,8) @ (12,7)
+No dust here!
+No dust here!
+[Decco] Recording Obstacle: (14,8) @ (13,7)
+No dust here!
+[Decco] Recording Obstacle: (15,8) @ (14,7)
+No dust here!
+[Decco] Recording Obstacle: (16,8) @ (15,7)
+[Decco] Recording Obstacle: (16,6) @ (15,7)
+[Decco] Recording Obstacle: (16,7) @ (15,7)
+[Decco] Route created to (8,4): [move("north"),move("north"),move("north"),move("west"),move("west"),move("west"),move("west"),move("west"),move("west"),move("west")]
+No dust here!
+[Harry] Recording Obstacle: (0,4) @ (1,4)
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+[Harry] Recording Obstacle: (1,7) @ (1,6)
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+No dust here!
+[Henry] Recording Obstacle: (13,6) @ (12,5)
+[Harry] Recording Obstacle: (9,8) @ (8,7)
+[Harry] Recording Obstacle: (8,8) @ (8,7)
+[Harry] Recording Obstacle: (7,8) @ (8,7)
+No dust here!
+No dust here!
+[Harry] Recording Obstacle: (10,8) @ (9,7)
+[Harry] Recording Obstacle: (11,8) @ (10,7)
+[Henry] Recording Obstacle: (16,4) @ (15,5)
+[Henry] Recording Obstacle: (16,5) @ (15,5)
+[Henry] Recording Obstacle: (16,6) @ (15,5)
+[Henry] Recording Obstacle: (16,3) @ (15,4)
+[Henry] Recording Obstacle: (16,2) @ (15,3)
+No dust here!
+[Henry] Recording Obstacle: (16,1) @ (15,2)
+No dust here!
+[Harry] Recording Obstacle: (9,0) @ (10,1)
+[Harry] Recording Obstacle: (11,0) @ (10,1)
+[Henry] Recording Obstacle: (16,0) @ (15,1)
+[Henry] Recording Obstacle: (14,0) @ (15,1)
+Grid square (14,0) is permanently blocked.
+No dust here!
+Grid square (9,0) is permanently blocked.
